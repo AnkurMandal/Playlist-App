@@ -37,7 +37,11 @@ public class Main {
 
         ListIterator<Song>itr=myPlaylist.listIterator();
         System.out.println("Now playing: "+itr.next());
-
+        /*
+        for pressing next button set wasNext=true
+        for pressing prev button set wasNext=false
+         */
+        boolean wasNext=true;
         printMenu(myPlaylist);
         Scanner sc=new Scanner(System.in);
         boolean quit=false;
@@ -47,13 +51,28 @@ public class Main {
             switch (choice){
                 case 1: printMenu(myPlaylist);
                     break;
-                case 2: if(itr.hasNext()) System.out.println("Now playing : "+itr.next());
+                case 2: if(!wasNext){
+                    itr.next();
+                    wasNext=true;
+                }
+                    if(itr.hasNext()) System.out.println("Now playing : "+itr.next());
                     else System.out.println("You have reached the end of playlist");
                     break;
-                case 3: if(itr.hasPrevious()) System.out.println("Now playing : "+itr.previous());
+                case 3:if(wasNext){
+                    itr.previous();
+                    wasNext=false;
+                }
+                    if(itr.hasPrevious()) System.out.println("Now playing : "+itr.previous());
                 else System.out.println("This is the first song of the playlist");
                     break;
-                case 4:
+                case 4:if(wasNext) {
+                    System.out.println("Now Playing: "+itr.previous());
+                    wasNext=false;
+                }
+                else {
+                    System.out.println("Now Playing: "+itr.next());
+                    wasNext=true;
+                }
                     break;
                 case 5:
                     break;
