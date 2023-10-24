@@ -74,7 +74,8 @@ public class Main {
                     wasNext=true;
                 }
                     break;
-                case 5:
+                case 5:itr.remove();
+                    System.out.println("Song removed successfully");
                     break;
                 case 6:printAllSong(myPlaylist);
                     break;
@@ -85,6 +86,8 @@ public class Main {
             }
         }
     }
+
+
 
     private static void printAllSong(LinkedList<Song> myPlaylist) {
         if(myPlaylist.isEmpty()) {
